@@ -4,20 +4,21 @@
 
 # Installation
 
+Clone project in your home directory.
+
 ```
-$ git clone git@gitlab.com:george.n/bashrc.git .bashrc.d
+cd ~/
+git clone https://github.com/xshoji/.bashrc.d
 ```
 
 # Local environment setting
 
 ```
-$ pwd
-/home/xxxx/.bashrc.d
-$ cp .org.bashrc_local .bashrc_local
-
+cd ~/.bashrc.d
+cp .org.bashrc_local .bashrc_local
 vim .bashrc_local
 
-$ sh setup.sh
+sh setup.sh -m CREATE
 ```
 
 # Architecture
