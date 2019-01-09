@@ -1,0 +1,14 @@
+### Common ###
+.DS_Store
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+.bashrc_local
+.bashrc_common
+.gitconfig_local
+.fzf_local
+
