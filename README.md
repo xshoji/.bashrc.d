@@ -1,0 +1,2 @@
+# .bashrc.d
+Management dotfiles
