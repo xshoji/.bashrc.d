@@ -1,18 +1,52 @@
-#!/bin/sh
-#==========================================================
-# 概要
-#  .bashrc等のファイルのシンボリックリンクを作成してくれます
-#
-# 引数
-#  sh this_shell.sh
-#
-#==========================================================
+#!/bin/bash
+
+function usage()
+{
+cat << _EOT_
+
+   setup
+  ---------- author: xshoji
+
+  Usage:
+    ./$(basename "$0")
+
+  Description:
+    Create symlinks.
+
+  Optional parameters:
+    --debug : Enable debug mode
+
+_EOT_
+exit 1
+}
+
+
+
 
 #------------------------------------------
-# 設定
-set -ux
+# Preparation
+#------------------------------------------
+set -eu
 
-# リンク対象のファイル群
+# Parse parameters
+for ARG in "$@"
+do
+    SHIFT="true"
+    [ "${ARG}" == "--debug" ] && { shift 1; set -eux; SHIFT="false"; }
+    ([ "${ARG}" == "--help" ] || [ "${ARG}" == "-h" ]) && { shift 1; HELP="true"; SHIFT="false"; }
+    ([ "${SHIFT}" == "true" ] && [ "$#" -gt 0 ]) && { shift 1; }
+done
+[ ! -z "${HELP+x}" ] && { usage; exit 0; }
+# Check invalid state and display usage
+[ ! -z "${INVALID_STATE+x}" ] && { usage; exit 1; }
+
+
+
+#------------------------------------------
+# Main
+#------------------------------------------
+
+# Link target files
 FILES=()
 FILES+=( .bashrc )
 FILES+=( .bash_profile )
@@ -24,14 +58,11 @@ FILES+=( .gitconfig )
 FILES+=( .gitconfig_local )
 FILES+=( .vimrc )
 
-#------------------------------------------
-# メイン処理
-
-# 設定されているリンク対象のファイルが存在していればリンクを貼る
+# Create links
 DIR_HOME="$(cd $(dirname ${BASH_SOURCE:-$0})/.. && pwd)"
 DIR_BASHRCD="$(cd $(dirname ${BASH_SOURCE:-$0}) && pwd)"
-
 for FILE in ${FILES[@]}; do
+    # Skip if link target file not exists
     if [ ! -f ${DIR_BASHRCD}/${FILE} ]; then
         continue;
     fi
@@ -43,4 +74,3 @@ for FILE in ${FILES[@]}; do
         ln -s ${DIR_BASHRCD}/${FILE} ${DIR_HOME}/.profile
     fi
 done
-
