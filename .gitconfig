@@ -1,19 +1,23 @@
 # git - Is it possible to include a file in your .gitconfig - Stack Overflow http://stackoverflow.com/questions/1557183/is-it-possible-to-include-a-file-in-your-gitconfig
 [include]
-  path = ~/.gitconfig_local
+	path = ~/.gitconfig_local
 
 [core]
-  pager = less -r
-  quotepath = false
-  editor = vim
-  filemode = false
+	pager = 
+	quotepath = false
+	editor = vim
+	filemode = false
+	autocrlf = input
 
 [color]
-  ui = true
+	ui = true
 
 [log]
-  # command line - How to change git log date formats - Stack Overflow http://stackoverflow.com/questions/7853332/how-to-change-git-log-date-formats
+	# command line - How to change git log date formats - Stack Overflow http://stackoverflow.com/questions/7853332/how-to-change-git-log-date-formats
 	date = iso
 
 [format]
-  pretty = format:%C(bold blue)%ad%Creset %Cred%h%Creset %Cgreen%d%Creset %s %C(yellow)<%an:%ae>%Creset
+	pretty = format:%C(bold blue)%ad%Creset %Cred%h%Creset %Cgreen%d%Creset %s %C(yellow)<%an:%ae>%Creset
+
+[credential]
+	helper = osxkeychain
