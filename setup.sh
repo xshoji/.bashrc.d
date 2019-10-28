@@ -58,6 +58,7 @@ FILES+=( .bashrc )
 FILES+=( .bash_profile )
 FILES+=( .bashrc_common )
 FILES+=( .gitconfig )
+FILES+=( .gitignore_global )
 FILES+=( .vimrc )
 # Local files
 FILES+=( .gitconfig_local )

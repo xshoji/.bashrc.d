@@ -8,6 +8,8 @@
 	editor = vim
 	filemode = false
 	autocrlf = input
+	ignorecase = false
+	excludesfile = ~/.gitignore_global
 
 [color]
 	ui = true
