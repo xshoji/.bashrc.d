@@ -5,15 +5,22 @@
 #PATH Setting
 export PATH="/usr/local/sbin:$PATH"
 
-function docker-compose-rerun-exec() {
-  echo ">> docker-compose down ..."
-  docker-compose down
-  echo ">> docker-compose up ..."
-  docker-compose up -d
-  local CONTAINER_NAME=$(docker ps --filter name=${PWD##*/} --format "table {{.Names}}" |grep -v "NAMES" |head -n 1)
+
+function docker-compose-exec-current() {
+  local container_num="${1}"
+  [[ ${container_num} == "" ]] && { container_num="1"; }
+  local CONTAINER_NAME=$(docker ps --filter name=${PWD##*/} --format "table {{.Names}}" |grep -v "NAMES" |head -n ${container_num} |tail -n 1)
   [[ "${CONTAINER_NAME}" == "" ]] && { echo "CONTAINER_NAME was not found."; return; }
   echo ">> docker-compose exec to ${CONTAINER_NAME} ..."
   docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -it ${CONTAINER_NAME} /bin/bash
+}
+
+function docker-compose-rebuild-exec() {
+  echo ">> docker-compose down ..."
+  docker-compose down
+  echo ">> docker-compose up -d --build ..."
+  docker-compose up -d --build
+  docker-compose-exec-current
 }
 
 function docker-remove-image() {
