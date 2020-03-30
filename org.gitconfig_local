@@ -1,3 +1,7 @@
 [user]
   name = xxxx
   email = xxxx@xxxx
+
+[ghq]
+  root = ~/Develop/ghq
+
