@@ -32,3 +32,7 @@ function docker-remove-image() {
   docker rmi ${IMAGE_NAME}
 }
 
+
+alias gc='cd $(ghq root)/$(ghq list | fzf)'
+alias gb='ghq list | fzf |awk -F"/" '"'"'{ system("export GITHUB_HOST="$1"; hub browse "$2"/"$3"") }'"'"''
+
