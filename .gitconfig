@@ -8,6 +8,7 @@
 	editor = vim
 	filemode = false
 	autocrlf = input
+	safecrlf = true
 	ignorecase = false
 	excludesfile = ~/.gitignore_global
 
