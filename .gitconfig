@@ -7,7 +7,7 @@
 	quotepath = false
 	editor = vim
 	filemode = false
-	autocrlf = input
+	autocrlf = false
 	safecrlf = true
 	ignorecase = false
 	excludesfile = ~/.gitignore_global
