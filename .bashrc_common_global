@@ -20,7 +20,7 @@ HISTTIMEFORMAT='%Y-%m-%d %T '
 # Ignore duplicated history
 HISTCONTROL=ignoredups:ignorespace
 # Ignore string
-HISTIGNORE='ls -al:cd'
+HISTIGNORE='ls -al:cd ..:cd'
 
 # Set default editor
 export EDITOR=vim
