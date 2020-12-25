@@ -2,6 +2,13 @@
 # Local environment setting
 #----------------------------
 
+# << sync .bashrc.d >>
+# # dry-run
+# SYNC_HOST=example-server.co.jp; rsync -ahvn ~/.bashrc.d ${SYNC_HOST}:/home/user --exclude='.git*' --exclude='.fzf*' --max-size=10M
+# # sync
+# SYNC_HOST=example-server.co.jp; rsync -ahv ~/.bashrc.d ${SYNC_HOST}:/home/user --exclude='.git*' --exclude='.fzf*' --max-size=10M; ssh ${SYNC_HOST} bash /home/user/.bashrc.d/setup.sh -m CREATE; SYNC_HOST=""
+
+
 #PATH Setting
 export PATH="/usr/local/sbin:$PATH"
 
