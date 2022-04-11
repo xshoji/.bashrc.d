@@ -74,7 +74,7 @@ linux*)
   ;;
 esac
 
-
+alias gitfixcommit='git commit --amend --no-edit'
 
 #----------------------------
 # Other settings
