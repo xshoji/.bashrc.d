@@ -63,6 +63,7 @@ PS1='[\D{%m-%d} \t] \h \W\[\033[32m\]$(parse_git_branch)\[\033[00m\]\$ '
 #----------------------------
 alias mv='mv -i -v'
 alias tailf='tail -f'
+alias gitfixcommit='git commit --amend --no-edit'
 
 # Wokashi: Mac OS Xのlsで色を付ける http://mironal-memo.blogspot.jp/2012/09/macosx-ls.html
 case "${OSTYPE}" in
@@ -74,7 +75,6 @@ linux*)
   ;;
 esac
 
-alias gitfixcommit='git commit --amend --no-edit'
 
 #----------------------------
 # Other settings
