@@ -4,11 +4,11 @@
 
 # Color configuration
 export FZF_DEFAULT_OPTS="
-  --color=fg:#c0caf5,bg:#1a1b26
-  --color=hl:#ff9e64
-  --color=fg+:#ffffff,bg+:#3b4261
-  --color=hl+:#ff9e64
-  --color=info:#7aa2f7,prompt:#7aa2f7,pointer:#7aa2f7,marker:#9ece6a
+  --color=fg:#d0d0d0,bg:#1c1c1c
+  --color=hl:#ff5f5f
+  --color=fg+:#ffffff,bg+:#3a3a3a
+  --color=hl+:#ff8787
+  --color=pointer:#87afff,marker:#5fd75f,info:#afafaf
 "
 
 # fco - checkout git branch/tag
