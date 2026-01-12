@@ -2,6 +2,15 @@
 # fzf local setting
 #----------------------------
 
+# Color configuration
+export FZF_DEFAULT_OPTS="
+  --color=fg:#c0caf5,bg:#1a1b26
+  --color=hl:#ff9e64
+  --color=fg+:#ffffff,bg+:#3b4261
+  --color=hl+:#ff9e64
+  --color=info:#7aa2f7,prompt:#7aa2f7,pointer:#7aa2f7,marker:#9ece6a
+"
+
 # fco - checkout git branch/tag
 fco() {
   local tags branches target
