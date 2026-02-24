@@ -3,7 +3,7 @@
 	path = ~/.gitconfig_local
 
 [core]
-	pager = delta
+	pager = cat
 	quotepath = false
 	editor = vim
 	filemode = false
@@ -11,6 +11,9 @@
 	safecrlf = true
 	ignorecase = false
 	excludesfile = ~/.gitignore_global
+
+[pager]
+	diff = delta
 
 [color]
 	ui = true
