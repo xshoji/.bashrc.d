@@ -60,6 +60,7 @@ FILES+=( .bashrc_common )
 FILES+=( .gitconfig )
 FILES+=( .gitignore_global )
 FILES+=( .vimrc )
+FILES+=( .tmux.conf )
 # Local files
 FILES+=( .gitconfig_local )
 FILES+=( .bashrc_local )
