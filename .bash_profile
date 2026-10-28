@@ -7,3 +7,6 @@ if [ -f ~/.bashrc ]; then
     source ~/.bashrc
 fi
 
+
+# Amp CLI
+export PATH="$HOME/.local/bin:$PATH"
