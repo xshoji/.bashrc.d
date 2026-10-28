@@ -49,3 +49,73 @@ PERL_LOCAL_LIB_ROOT="/Users/user/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_R
 PERL_MB_OPT="--install_base \"/Users/user/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/user/perl5"; export PERL_MM_OPT;
 
+# tailscale
+startTailscaleSession(){
+  sudo brew services start tailscale
+  sudo tailscale up --ssh --accept-routes
+  tmux new -s tailscale
+}
+
+stopTailscaleSession(){
+  sudo tailscale down
+  sudo brew services stop tailscale
+  tmux kill-session -t tailscale
+}
+
+
+# vercel-labs/skills
+export DISABLE_TELEMETRY=1
+
+
+# ollama
+orun() (
+    local serve_pid=""
+    local started=false
+
+    # 終了時のクリーンアップ
+    cleanup() {
+        # 自分で起動していなければ何もしない
+        [[ "$started" == true ]] || return 0
+
+        # 他に ollama run が動いていれば何もしない
+        if pgrep -f '(^|/)ollama run([[:space:]]|$)' >/dev/null; then
+            return 0
+        fi
+
+        # 自分で起動した ollama serve を終了
+        if kill -0 "$serve_pid" 2>/dev/null; then
+            kill "$serve_pid" 2>/dev/null
+        fi
+    }
+
+    trap cleanup EXIT
+
+    # ollama serve が起動しているか確認
+    if ! pgrep -f '(^|/)ollama serve([[:space:]]|$)' >/dev/null; then
+        # 非同期起動
+        ollama serve >/tmp/ollama-serve.log 2>&1 &
+        serve_pid=$!
+        started=true
+    fi
+
+    # APIが応答するまで待機（最大30秒）
+    local i
+    for ((i = 0; i < 60; i++)); do
+        if curl -fsS --max-time 1 http://localhost:11434/api/tags \
+            >/dev/null 2>&1; then
+            break
+        fi
+        sleep 0.5
+    done
+
+    # 起動できなかった場合
+    if ! curl -fsS --max-time 1 \
+        http://localhost:11434/api/tags >/dev/null 2>&1; then
+        echo "Error: ollama serve が起動しませんでした" >&2
+        return 1
+    fi
+
+    # ollama run を実行（引数はそのまま渡す。 OLLAMA_NOHISTORY=1 で履歴を残さないモード）
+    ollama run "$@"
+)
+
