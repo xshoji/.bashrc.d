@@ -13,7 +13,7 @@
 export PATH="/usr/local/sbin:$PATH"
 
 
-function docker-compose-exec-current() {
+docker-compose-exec-current() {
   local container_num="${1}"
   [[ ${container_num} == "" ]] && { container_num="1"; }
   local CONTAINER_NAME=$(docker ps --filter name=${PWD##*/} --format "table {{.Names}}" |grep -v "NAMES" |head -n ${container_num} |tail -n 1)
@@ -22,7 +22,7 @@ function docker-compose-exec-current() {
   docker exec -e COLUMNS="`tput cols`" -e LINES="`tput lines`" -it ${CONTAINER_NAME} /bin/bash
 }
 
-function docker-compose-rebuild-exec() {
+docker-compose-rebuild-exec() {
   echo ">> docker-compose down ..."
   docker-compose down
   echo ">> docker-compose up -d --build ..."
@@ -30,7 +30,7 @@ function docker-compose-rebuild-exec() {
   docker-compose-exec-current
 }
 
-function docker-remove-image() {
+docker-remove-image() {
   local IMAGE_NAME=$(docker ps -a --filter name=${PWD##*/} --format "table {{.Image}}" |grep -v "IMAGE" |head -n 1)
   [[ ${IMAGE_NAME} == "" ]] && { echo "IMAGE_NAME was not found."; return; }
   echo ">> docker-compose down ..."
@@ -50,13 +50,13 @@ PERL_MB_OPT="--install_base \"/Users/user/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/Users/user/perl5"; export PERL_MM_OPT;
 
 # tailscale
-startTailscaleSession(){
+start-tailscale-session(){
   sudo brew services start tailscale
   sudo tailscale up --ssh --accept-routes
   tmux new -s tailscale
 }
 
-stopTailscaleSession(){
+stop-tailscale-session(){
   sudo tailscale down
   sudo brew services stop tailscale
   tmux kill-session -t tailscale
@@ -118,4 +118,3 @@ orun() (
     # ollama run を実行（引数はそのまま渡す。 OLLAMA_NOHISTORY=1 で履歴を残さないモード）
     ollama run "$@"
 )
-
