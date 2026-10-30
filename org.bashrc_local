@@ -68,7 +68,8 @@ export DISABLE_TELEMETRY=1
 
 
 # ollama
-orun() (
+orun() {
+  (
     local serve_pid=""
     local started=false
 
@@ -117,4 +118,5 @@ orun() (
 
     # ollama run を実行（引数はそのまま渡す。 OLLAMA_NOHISTORY=1 で履歴を残さないモード）
     ollama run "$@"
-)
+  )
+}
